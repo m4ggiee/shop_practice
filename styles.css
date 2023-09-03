@@ -1,0 +1,10 @@
+#main {
+  display: flex;
+  gap: 5px;
+}
+
+#main > div {
+  flex-basis: 30%;
+  border: 1px solid black;
+  min-height: 100px;
+}
