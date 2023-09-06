@@ -11,11 +11,40 @@
 </head>
 
 <body>
+
   <div id="main">
     <div id="left"></div>
     <div id="center"></div>
     <div id="right"></div>
   </div>
+
+  <div id="message" ></div>
+
+  <form id="order-form">
+    <label for="name">ПІБ покупця:</label>
+    <input type="text" id="name" name="name" required><br><br>
+    <label for="city">Місто:</label>
+    <select id="city" name="city" required>
+      <option value="">--Виберіть місто--</option>
+      <option value="Київ">Київ</option>
+      <option value="Одеса">Одеса</option>
+      <option value="Львів">Львів</option>
+    </select><br><br>
+    <label for="warehouse">Склад Нової пошти для надсилання:</label>
+    <input type="text" id="warehouse" name="warehouse" required><br><br>
+    <label for="payment-method">Спосіб оплати:</label><br>
+    <input type="radio" id="cash-on-delivery" name="payment-method" value="cash-on-delivery">
+    <label for="cash-on-delivery">Післяплати</label><br>
+    <input type="radio" id="credit-card" name="payment-method" value="credit-card">
+    <label for="credit-card">Оплата банківською карткою</label><br><br>
+    <label for="quantity">Кількість продукції, що купується:</label>
+    <input type="number" id="quantity" name="quantity" min="1" required><br><br>
+    <label for="comment">Коментар до замовлення:</label><br>
+    <textarea id="comment" name="comment"></textarea><br><br>
+    <input type="submit" value="Підтвердити замовлення">
+  </form>
+  
+  <div id="order-summary"></div>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
