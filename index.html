@@ -41,10 +41,15 @@
     <input type="number" id="quantity" name="quantity" min="1" required><br><br>
     <label for="comment">Коментар до замовлення:</label><br>
     <textarea id="comment" name="comment"></textarea><br><br>
-    <input type="submit" value="Підтвердити замовлення">
+    <input id="order-button" type="submit" value="Підтвердити замовлення">
   </form>
   
   <div id="order-summary"></div>
+
+  <button id="my-orders">Мої замовлення</button>
+
+  <div id="orders"></div>
+  <ul id="tasks"></ul>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>

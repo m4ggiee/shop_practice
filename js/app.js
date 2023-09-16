@@ -26,33 +26,88 @@ function showProducts(products, category) {
     parentElement.appendChild(element);
   }
 }
-
+//--------------------------------------------------------------------------
 function showProductsInformation(product, category) {
   const parentElement = document.getElementById('right');
   parentElement.innerHTML = '';
 
-  let element = document.createElement('div');
-  element.textContent = `${product.name}  Price: $${product.price} Descriptions:${product.description}`;
+  const element = document.createElement('div');
+  element.textContent = `${product.name}  Price: $${product.price} Descriptions: ${product.description}`;
   element.setAttribute('data-product', product.id);
-    
-  let button = document.createElement('button');
+
+  const button = document.createElement('button');
   button.textContent = 'Buy';
   button.style.backgroundColor = 'lightgreen';
-  const messageDiv = document.querySelector('#message');
-  let order = document.getElementById('#order-form');
-  button.addEventListener("click", function() {
-    document.getElementById("order-form").style.display = "block";
+
+  parentElement.appendChild(element);
+  parentElement.appendChild(button);
+
+  const orderForm = document.querySelector('#order-form');
+
+  button.addEventListener('click', function() {
+    orderForm.style.display = 'block';
   });
-  button.addEventListener('click', () => {
-    messageDiv.textContent = 'Товар куплено!';  
-    setTimeout(() => {
+
+  const messageDiv = document.querySelector('#message');
+
+  button.addEventListener('click', function() {
+    orderForm.style.display = 'block';
+  });
+
+  const orderButton = document.querySelector('#order-button');
+
+  orderButton.addEventListener('click', function() {
+    const productName = product.name; 
+    const order = { productName, date: product.name, price: product.price };
+    let orders = JSON.parse(localStorage.getItem(`orders-${category}`)) || [];
+    orders.push(order);
+    localStorage.setItem(`orders-${category}`, JSON.stringify(orders));
+    messageDiv.textContent = 'Товар куплено!';
+    orderForm.style.display = 'none';
+
+    setTimeout(function() {
       messageDiv.textContent = '';
     }, 2000);
   });
-    
-  parentElement.appendChild(element);
-  parentElement.appendChild(button);
+
+  window.addEventListener('load', () => {
+    tasks = JSON.parse(localStorage.getItem('ourTasks')) || [];
+    showTasks();
+  });
+
+  document.getElementById('my-orders').addEventListener('click', () => {
+    const str = document.forms[0].product.value;
+    tasks.push(str);
+    showTask(str, tasks.length - 1);
+    localStorage.setItem('ourTasks', JSON.stringify(tasks));
+  });
 }
+//--------------------------------------------------------------------------
+function showTasks() {
+  tasks.map((task, index) => showTask(task, index));
+}
+
+function showTask(task, index) {
+  const parent = document.getElementById('tasks');
+  const item = document.createElement('li');
+  item.textContent = task;
+
+  const btn = document.createElement('button');
+  btn.setAttribute('type', 'button');
+  btn.textContent = 'X';
+  btn.setAttribute('data-task-index', index);
+  btn.addEventListener('click', () => {
+    tasks.splice(index, 1);
+    localStorage.setItem('ourTasks', JSON.stringify(tasks));
+    item.remove();
+  });
+
+  item.appendChild(btn)
+  parent.appendChild(item);
+}
+
+//--------------------------------------------------------------------------
+
 
 showCategories();
 

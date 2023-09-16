@@ -27,7 +27,7 @@ const categories = {
       },
       {
         id: 4,
-        name: 'iPhone 100',
+        name: 'iPhone 14',
         price: 1500,
         description: 'iphone is not just a phone'
       },
@@ -63,3 +63,4 @@ const categories = {
     ],
   }
 };
+
